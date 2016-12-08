@@ -120,7 +120,7 @@ a{
 	-ms-transform: rotate(360deg);
 	border-color: #c0392b transparent;	
 }
-#wheel div.sec:nth-child(6){
+#wheel div.sec:nth-child(7){
 	transform: rotate(360deg);
 	-webkit-transform: rotate(360deg);
 	-moz-transform: rotate(360deg);
@@ -128,7 +128,7 @@ a{
 	-ms-transform: rotate(360deg);
 	border-color: #c0392b transparent;	
 }
-#wheel div.sec:nth-child(6){
+#wheel div.sec:nth-child(8){
 	transform: rotate(360deg);
 	-webkit-transform: rotate(360deg);
 	-moz-transform: rotate(360deg);
