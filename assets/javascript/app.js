@@ -1,7 +1,7 @@
 var colors = ["#B8D430", "#3AB745", "#029990", "#3501CB",
              "#2E2C75", "#673A7E", "#CC0071", "#F80120",
              "#F35B20", "#FB9A00", "#FFCC00", "#FEF200","#FB9A00", "#FFCC00"];
-var restaraunts = ["Korean", "Indian", "Italian", "Sandwiches","Burgers", "Breakfast",
+var restaurants = ["Korean", "Indian", "Italian", "Sandwiches","Burgers", "Breakfast",
                    "Mexican", "Caribbean","Vietnamese", "Chinese",
                    "Seafood", "Pizza", "Thai", "Japanese"];
 var startAngle = 0;
@@ -12,13 +12,10 @@ var spinTime = 0;
 var spinTimeTotal = 0;
 var ctx;
 
-
-   
-    $("#spin").on('click', spin);
-  
+var foodnum=[];
+ console.log(foodnum);
+ $("#spin").on("click", spin);
     
-   
-
 function drawRouletteWheel() {
   var canvas = document.getElementById("canvas");
   if (canvas.getContext) {
@@ -54,7 +51,7 @@ function drawRouletteWheel() {
       ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius,
                     250 + Math.sin(angle + arc / 2) * textRadius);
       ctx.rotate(angle + arc / 2 + Math.PI / 2);
-      var text = restaraunts[i];
+      var text = restaurants[i];
       ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
       ctx.restore();
     }
@@ -81,7 +78,7 @@ function spin() {
   rotateWheel();
 }
 function rotateWheel() {
-  spinTime += 30;
+  spinTime += 20;
   if(spinTime >= spinTimeTotal) {
     stopRotateWheel();
     return;
@@ -98,9 +95,13 @@ function stopRotateWheel() {
   var index = Math.floor((360 - degrees % 360) / arcd);
   ctx.save();
   ctx.font = 'bold 30px Helvetica, Arial';
-  var text = restaraunts[index]
+  var text = restaurants[index]
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
+  foodnum.push(index);
+  console.log(index);
+  console.log(foodnum);
+  yelpsearch(restaurants[index]);
 }
 function easeOut(t, b, c, d) {
   var ts = (t/=d)*t;
@@ -109,67 +110,61 @@ function easeOut(t, b, c, d) {
 }
 
 
-
 //==========google map API==========
 //create variable for coordinates
 var coordinates=[];
 var address;
+var map;
+var infoWindow;
+var service;
 
 
 function geocodeAddress(geocoder, resultsMap) {
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
-            //coords = results[0].geometry.location;
-            //coordinates.push(coords.nb);
-            //coordinates.push(coords.ob);
-            //console.log(results);
             resultsMap.setCenter(results[0].geometry.location);
+            coordinates.push(results[0].geometry.location);
+            console.log(coordinates);
             var marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location
             });
-            }
-       		});
-    		};
-
+          }
+        });
+      };
 
 //
 function initMap() {
-		//create geocoder to get coordinates
-		var geocoder = new google.maps.Geocoder();
+      //create geocoder to get coordinates
+      var geocoder = new google.maps.Geocoder();
 
-		//add event listener to add coordinates to the empty array
-		$("#submit").on("click", function(){
-		address = document.getElementById('address').value;
-		geocodeAddress(geocoder, map);
-		return false;
-		});
+      //add event listener to add coordinates to the empty array
+      $("#submit").on("click", function(){
+      address = document.getElementById('address').value;
+      geocodeAddress(geocoder, map);
+      return false;
+      });
 
-		var location = {lat: coordinates[0], lng: coordinates[1]};
+      //table appears here 
+
         // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: location,
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 29.7051, lng: -95.4018},
           scrollwheel: false,
           zoom: 12
         });
 
-        var service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-      	location: location,
-      	radius: 500,
-        }, processResults);
+    }
 
-        function processResults(result){
-  		console.log(result);
-		for (var i = 0; i<result.length; i++) {
-     		var marker = new google.maps.Marker({
-          		position: result[i].geometry.location,
-         		 map: map
-        	});
-  			}
-		}
+function yelpsearch(restaurant){
+    var yelpURL = "http://localhost:5000/yelp/search?term=" + restaurant + "&location=houston";
+    $.ajax({url: yelpURL, method: "GET"
+          }).done(function(response){
+             console.log(response);
+             console.log(yelpURL);
 
-      };
-		
-	$(document).ready(drawRouletteWheel, initMap);
-   // end of document ready function  
+          
+    });
+      }
+$(document).ready(drawRouletteWheel, initMap);
+//table hidden
