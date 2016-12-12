@@ -19,11 +19,6 @@
 </head>
 
 <body>
-      <!-- hidden yelp results table
-        <section id="hidetable" class="container content-section text-center">
-        <div <table class="table">
-            </table> --> 
-
     <div class="container">
         <header class="text-center">
             <h2>Can't decide what you want for dinner?</h2>
@@ -40,27 +35,32 @@
             <div class="row">
                 <button class="btn btn-default btn-lg" id="spin">Start Spinning!</button>
             </div>
-        </div>
-        
-            
             <!--create parameters for table-->
-        </div>
-        <!--The form user enter address to confine the list of restaurant-->
-        <div class="container">
-            <div class="panel panel-default">
-                <div class="panel panel-heading">
-                    <form id="addressform">
-                        <label for="address">
-                            <h4>Enter your Zip Code</h4></label>
-                        <input class="form-control input-lg" type="text" id="address" value="The Woodlands, TX">
-                        <!--Button triggered to add a zip code-->
-                        <input id="submit" type="submit" value="Click">
-                </div>
-                <div class="panel panel-body" id="map">
-                    googlemap here
+            <!-- hidden yelp results table -->
+            <!--ask for confirmationo of syntax -->
+            <div id="hideTable" class="noShow text-center">
+                <table class="table table-hidden table-hover">
+                    <tr>
+                        <tr>
+                            <tr>
+                </table>
+            </div>
+            <!--The form user enter address to confine the list of restaurant-->
+            <div class="container">
+                <div class="panel panel-default">
+                    <div class="panel panel-heading">
+                        <form id="addressform">
+                            <label for="address">
+                                <h4>Enter your Zip Code</h4></label>
+                            <input class="form-control input-lg" type="text" id="address" value="The Woodlands, TX">
+                            <!--Button triggered to add a zip code-->
+                            <input id="submit" type="submit" value="Click">
+                    </div>
+                    <div class="panel panel-body" id="map">
+                        googlemap here
+                    </div>
                 </div>
             </div>
-        </div>
 </body>
 <script type="text/javascript" src="assets/javascript/app.js"></script>
 
