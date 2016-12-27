@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dinner Spinner</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+    <!--Bootstrap File-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+     <!-- Custom CSS -->
+    <link href="assets/css/stylish-portfolio.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
+    <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3WjE2RZUtl1Tz-dP8-rthqZVAfox_Ztg&libraries=places&callback=initMap">
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="home" class="header">
+        <div class="text-center")">
+            <p id="titletext">Dinner Spinner</p>
+            <h1>Can't decide what you want for dinner?</h1>
+            <h3>Dinner Spinner is here for you!</h3>
+            <br>
+            <a href="#about" class="btn btn-dark btn-lg">Click to start</a>
+        </div>
+    </header>
+    <!-- About -->
+    <div id="about" class="about">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+            <!--The form user enter address to confine the list of restaurants-->
+            <form id="addressform">
+              <label for="address"><h2 style="color: white">Enter your Address / Zip Code</h2></label>
+              <input class="form-control input-lg" type="text" id="address">
+              <!--Button triggered to add a zip code-->
+              <br>
+              <button id="submit" class="btn btn-default btn-lg">Spin the Wheel!</button>
+            </form>
+            </div>
+        </div>
+
+            <div class="row" id="r1">
+                <div class="col-md-6">
+                <canvas id="canvas" width="600" height="600"></canvas>
+                </div>
+                <div class="col-md-6" id="restauranttable">
+                </div>
+                <div class="col-md-4" id="clickmap">
+                </div>
+            </div>
+    </div>
+    
+    <div id="map">
+    googlemap here
+    </div>
+    
+    <div class="click">
+    <a href="#home" class="btn btn-dark btn-lg">Front Page</a>
+    <a href="#about" class="btn btn-dark btn-lg">Spin the Wheel Again!</a>
+    </div>
+    
+</body>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</html>
